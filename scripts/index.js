@@ -76,7 +76,7 @@ const generateVideoItemHtml = function(video) {
   return `
  
   <li data-id=${video.id}>
-    <div class ='handle messagepop'>
+    <div class ='hidden'>
       <p>I'm some popped foobar</p>
     </div>
     <h2>${video.title}</h2>
@@ -86,6 +86,22 @@ const generateVideoItemHtml = function(video) {
   </li>
   `;
 };
+
+const generatePoppedVideoItemHtml = function (video){
+  return `
+ 
+  <li data-id=${video.id}>
+    <div class='lightboxcontent'>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <h2>${video.title}</h2>
+    <a href="#" >
+      <img src="${video.thumbnail}" alt="${video.title}">
+    </a>
+  </li>
+  `;
+};
+
 //
 // TASK:
 // 1. Create a `addVideosToStore` function that receives an array of decorated video 
@@ -104,7 +120,15 @@ const addVideosToStore = function(videos) {
 // 3. Add your array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-  const html = store.videos.map(video => generateVideoItemHtml(video));
+  const html = store.videos.map(video => {
+    if (video.popped === true){
+      return generatePoppedVideoItemHtml(video);
+      
+    }
+    else {
+      return generateVideoItemHtml(video);
+    }
+  });
   const htmlTemplate = html.join('');
   $('.results').html(htmlTemplate);
 };
@@ -145,9 +169,7 @@ const handleLightBox = function() {
     event.preventDefault();
     const clickedVideoID = $(this).closest('li').data('id');
     togglePopped(clickedVideoID);
-
-    // $(this).parent('li').find('.handle').toggleClass('messagepop');
-    // $(this).parent('li').find('.handle').toggleClass('lightboxcontent');
+    render();
   });
 };
 

@@ -10,44 +10,18 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-a.selected {
-    background-color:#1F75CC;
-    color:white;
-    z-index:100;
+li {
+    list-style: none;
 }
 
-.messagepop {
-    background-color:rgb(255, 0, 0);
-    border:5px solid #470000;
-    cursor:default;
+.hidden {
     display:none;
-    margin-top: 15px;
     position:static;
-    text-align:left;
-    width:394px;
-    z-index:50;
-    padding: 25px 25px 20px;
 }
 
 .lightboxcontent {
-    background-color:rgb(255, 0, 0);
-    border:5px solid #470000; 
     position: fixed;
     z-index: 100;
-    margin: auto auto;
     display: block;
-    width: 500px;
-}
-
-label {
-    display: block;
-    margin-bottom: 3px;
-    padding-left: 15px;
-    text-indent: -15px;
-}
-  
-.messagepop p, .messagepop.div {
-    border-bottom: 1px solid #EFEFEF;
-    margin: 8px 0;
-    padding-bottom: 8px;
+    left: 50%;
 }
