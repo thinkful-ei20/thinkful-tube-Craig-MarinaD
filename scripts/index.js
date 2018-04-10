@@ -34,7 +34,7 @@ const fetchVideos = function(searchTerm, callback) {
     part: 'snippet',
     key: API_KEY,
   };
-  $.getJSON(BASE_URL, query, callback);
+  $.getJSON(BASE_URL, query, callback);  
 };
 
 // TASK:
@@ -54,7 +54,7 @@ const decorateResponse = function(response) {
     return video;
   });
   addVideosToStore(videoArr);
-  return videoArr;
+  render();
 };
 
 // TASK:
@@ -108,8 +108,7 @@ const handleFormSubmit = function() {
     event.preventDefault();
     const searchTerm = $('#search-term').val();
     $('#search-term').val('');
-    fetchVideos(searchTerm, decorateResponse);
-    render();
+    fetchVideos(searchTerm, decorateResponse);    
   });
   // const handleFormSubmit = function() {
   //   $('form').on('submit', function(event) {
@@ -119,7 +118,7 @@ const handleFormSubmit = function() {
   //     fetchVideos(searchTerm, decorateResponse);
   //     render();
   //   });  
-  // };
+  // };  
 };
 
 // When DOM is ready:
