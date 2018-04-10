@@ -3,7 +3,6 @@
 'use strict';
 
 const API_KEY = 'AIzaSyA68gYnpN0ykW1n-V5ZmRZ0CyUR4EJA2zM';
-//https://www.googleapis.com/youtube/v3/search?part=snippet&q=surfing&maxResults=5&key=AIzaSyA68gYnpN0ykW1n-V5ZmRZ0CyUR4EJA2zM
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
   have been transformed into just the necessary data to display on our page, compared to the large
@@ -75,7 +74,8 @@ const generateVideoItemHtml = function(video) {
 // 1. Create a `addVideosToStore` function that receives an array of decorated video 
 // objects and sets the array as the value held in store.items
 // TEST IT!
-const addVideosToStore = function(videos) {
+const addVideosToStore = function(videos) { 
+  store.videos = [];
   videos.map(item => {
     store.videos.push(item);
   });
@@ -87,7 +87,9 @@ const addVideosToStore = function(videos) {
 // 3. Add your array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-  
+  const html = store.videos.map(video => generateVideoItemHtml(video));
+  const htmlTemplate = html.join('');
+  $('.results').html(htmlTemplate);
 };
 
 // TASK:
@@ -106,9 +108,18 @@ const handleFormSubmit = function() {
     event.preventDefault();
     const searchTerm = $('#search-term').val();
     $('#search-term').val('');
-    fetchVideos(searchTerm, addVideosToStore);
+    fetchVideos(searchTerm, decorateResponse);
     render();
-  });  
+  });
+  // const handleFormSubmit = function() {
+  //   $('form').on('submit', function(event) {
+  //     event.preventDefault();
+  //     const searchTerm = $('#search-term').val();
+  //     $('#search-term').val('');
+  //     fetchVideos(searchTerm, decorateResponse);
+  //     render();
+  //   });  
+  // };
 };
 
 // When DOM is ready:
