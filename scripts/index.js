@@ -1,3 +1,5 @@
+/* global $ */
+
 'use strict';
 
 const API_KEY = 'AIzaSyA68gYnpN0ykW1n-V5ZmRZ0CyUR4EJA2zM';
@@ -33,7 +35,7 @@ const fetchVideos = function(searchTerm, callback) {
     part: 'snippet',
     key: API_KEY,
   };
-  console.log($.getJSON(BASE_URL, query, callback));
+  $.getJSON(BASE_URL, query, callback);
 };
 
 // TASK:
@@ -45,7 +47,13 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-  return response.map();
+  return response.items.map(item => {
+    let video = {};
+    video.id = item.id.videoId;
+    video.title = item.snippet.title;
+    video.thumbnail = item.snippet.thumbnails.default.url;
+    console.log(video);
+  });
 };
 
 // TASK:
