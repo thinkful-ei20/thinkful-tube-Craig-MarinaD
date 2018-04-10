@@ -2,6 +2,14 @@
 
 'use strict';
 
+const deselect = function deselect(e) {
+  $('.pop').slideFadeToggle(function() {
+    e.removeClass('selected');
+  });    
+};
+
+
+
 const API_KEY = 'AIzaSyA68gYnpN0ykW1n-V5ZmRZ0CyUR4EJA2zM';
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
@@ -64,9 +72,14 @@ const decorateResponse = function(response) {
 // TEST IT!
 const generateVideoItemHtml = function(video) {
   return `
+ 
   <li data-id=${video.id}>
-   <h2>${video.title}</h2>
-   <a href="#" ><img src="${video.thumbnail}" alt="${video.title}"></a>
+  <div class ='handle messagepop'>
+  <p>I'm some popped foobar</p>
+</div>
+    <h2>${video.title}</h2>
+     <a href="#" ><img src="${video.thumbnail}" alt="${video.title}"></a>
+   
   </li>
   `;
 };
@@ -114,8 +127,10 @@ const handleFormSubmit = function() {
 };
 
 const handleLightBox = function() {
-  $('ul').on('click', 'a',function() {
-    $(this).toggleClass('model');
+
+  $('ul').on('click', 'a',function(event) {
+
+    $(this).parent('li').find('.handle').removeClass('messagepop');
   });
 };
 

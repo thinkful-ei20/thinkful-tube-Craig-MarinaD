@@ -11,10 +11,12 @@ body {
 }
 
 /* .model {
-    display: block;
-    width: 30px;
-    margin: auto auto;
+    position: absolute;
+    width: 300px;
+    margin: 25% 25%;
     background: red;
+    z-index:100;
+    display: inline-block;
 } */
 
 a.selected {
