@@ -46,11 +46,12 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
+  console.log(response);
   const videoArr = response.items.map(item => {
     let video = {};
     video.id = item.id.videoId;
     video.title = item.snippet.title;
-    video.thumbnail = item.snippet.thumbnails.default.url;
+    video.thumbnail = item.snippet.thumbnails.high.url;
     return video;
   });
   addVideosToStore(videoArr);
@@ -65,11 +66,11 @@ const generateVideoItemHtml = function(video) {
   return `
   <li data-id=${video.id}>
    <h2>${video.title}</h2>
-   <img src="${video.thumbnail}" alt="${video.title}">
+   <a href="#" ><img src="${video.thumbnail}" alt="${video.title}"></a>
   </li>
   `;
 };
-
+//
 // TASK:
 // 1. Create a `addVideosToStore` function that receives an array of decorated video 
 // objects and sets the array as the value held in store.items
@@ -110,18 +111,16 @@ const handleFormSubmit = function() {
     $('#search-term').val('');
     fetchVideos(searchTerm, decorateResponse);    
   });
-  // const handleFormSubmit = function() {
-  //   $('form').on('submit', function(event) {
-  //     event.preventDefault();
-  //     const searchTerm = $('#search-term').val();
-  //     $('#search-term').val('');
-  //     fetchVideos(searchTerm, decorateResponse);
-  //     render();
-  //   });  
-  // };  
+};
+
+const handleLightBox = function() {
+  $('ul').on('click', 'a',function() {
+    $(this).toggleClass('model');
+  });
 };
 
 // When DOM is ready:
 $(function () {
   handleFormSubmit();
+  handleLightBox();
 });
