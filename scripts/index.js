@@ -1,7 +1,7 @@
 'use strict';
 
-const API_KEY = 'YOUR_KEY_HERE';
-
+const API_KEY = 'AIzaSyA68gYnpN0ykW1n-V5ZmRZ0CyUR4EJA2zM';
+//https://www.googleapis.com/youtube/v3/search?part=snippet&q=surfing&maxResults=5&key=AIzaSyA68gYnpN0ykW1n-V5ZmRZ0CyUR4EJA2zM
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
   have been transformed into just the necessary data to display on our page, compared to the large
@@ -20,7 +20,7 @@ const store = {
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
-const BASE_URL = '';
+const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 // TASK:
 // 1. Create a `fetchVideos` function that receives a `searchTerm` and `callback`
@@ -80,7 +80,10 @@ const render = function() {
 //   g) Inside the callback, run the `render` function 
 // TEST IT!
 const handleFormSubmit = function() {
-
+  $('form').submit(function(event) {
+    event.preventDefault();
+    console.log('works');
+  });
 };
 
 // When DOM is ready:
