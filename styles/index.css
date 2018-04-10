@@ -10,15 +10,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* .model {
-    position: absolute;
-    width: 300px;
-    margin: 25% 25%;
-    background: red;
-    z-index:100;
-    display: inline-block;
-} */
-
 a.selected {
     background-color:#1F75CC;
     color:white;
@@ -26,16 +17,26 @@ a.selected {
 }
 
 .messagepop {
-    background-color:#FFFFFF;
-    border:1px solid #999999;
+    background-color:rgb(255, 0, 0);
+    border:5px solid #470000;
     cursor:default;
     display:none;
     margin-top: 15px;
-    position:absolute;
+    position:static;
     text-align:left;
     width:394px;
     z-index:50;
     padding: 25px 25px 20px;
+}
+
+.lightboxcontent {
+    background-color:rgb(255, 0, 0);
+    border:5px solid #470000; 
+    position: fixed;
+    z-index: 100;
+    margin: auto auto;
+    display: block;
+    width: 500px;
 }
 
 label {

@@ -20,6 +20,7 @@ const API_KEY = 'AIzaSyA68gYnpN0ykW1n-V5ZmRZ0CyUR4EJA2zM';
     id: '98ds8fbsdy67',
     title: 'Cats dancing the Macarena',
     thumbnail: 'https://img.youtube.com/some/thumbnail.jpg'
+    popped: true/false
   }
 
 */
@@ -60,6 +61,7 @@ const decorateResponse = function(response) {
     video.id = item.id.videoId;
     video.title = item.snippet.title;
     video.thumbnail = item.snippet.thumbnails.high.url;
+    video.popped = false;
     return video;
   });
   addVideosToStore(videoArr);
@@ -74,12 +76,13 @@ const generateVideoItemHtml = function(video) {
   return `
  
   <li data-id=${video.id}>
-  <div class ='handle messagepop'>
-  <p>I'm some popped foobar</p>
-</div>
+    <div class ='handle messagepop'>
+      <p>I'm some popped foobar</p>
+    </div>
     <h2>${video.title}</h2>
-     <a href="#" ><img src="${video.thumbnail}" alt="${video.title}"></a>
-   
+    <a href="#" >
+      <img src="${video.thumbnail}" alt="${video.title}">
+    </a>
   </li>
   `;
 };
@@ -106,6 +109,16 @@ const render = function() {
   $('.results').html(htmlTemplate);
 };
 
+const togglePopped = function (usrId) {
+  let currentVideo = {};
+  store.videos.forEach(video => {
+    if (video.id === usrId) {
+      currentVideo = video;
+      return;
+    }
+  });
+  currentVideo.popped = !currentVideo.popped;
+};
 // TASK:
 // 1. Create a `handleFormSubmit` function that adds an event listener to the form
 // 2. The listener should:
@@ -129,8 +142,12 @@ const handleFormSubmit = function() {
 const handleLightBox = function() {
 
   $('ul').on('click', 'a',function(event) {
+    event.preventDefault();
+    const clickedVideoID = $(this).closest('li').data('id');
+    togglePopped(clickedVideoID);
 
-    $(this).parent('li').find('.handle').removeClass('messagepop');
+    // $(this).parent('li').find('.handle').toggleClass('messagepop');
+    // $(this).parent('li').find('.handle').toggleClass('lightboxcontent');
   });
 };
 
